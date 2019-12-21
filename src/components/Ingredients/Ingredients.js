@@ -7,9 +7,14 @@ import Search from './Search';
 const Ingredients = () => {
 
   const [userIngredients, setUserIngredients] = useState([]);
-  const [statusSimpan, setStatusSimpan] = useState(false);
+  //const [statusSimpan, setStatusSimpan] = useState(false);
+  const [statusDelete, setStatusDelete] = useState(false);
 
   useEffect(() => {
+    fetchData()
+  }, [])
+
+  const fetchData = () => {
     fetch("https://react-hook-project.firebaseio.com/ingredients.json")
     .then(response => response.json())
     .then(responseData => {
@@ -23,15 +28,18 @@ const Ingredients = () => {
       }
       setUserIngredients(loadedIngredients)
     })
-  }, [])
+  }
 
   const addUserIngredientsHandler = ingredient => {
 
   }
 
   const simpanStatus = (data) => {
-    setStatusSimpan(true)
     setUserIngredients([...userIngredients, data])
+  }
+
+  const deleteStatus = () => {
+    fetchData()
   }
 
   return (
@@ -41,7 +49,7 @@ const Ingredients = () => {
       <section>
         <Search />
         {/* Need to add list here! */}
-        <IngredientList ingredients={userIngredients} onRemoveItem={() =>{}}/>
+        <IngredientList ingredients={userIngredients} statusDelete={deleteStatus}/>
       </section>
     </div>
   );

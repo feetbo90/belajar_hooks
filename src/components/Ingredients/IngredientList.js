@@ -16,12 +16,13 @@ const deleteIngredients = (id) => {
     
 }
 
+  console.log(props.ingredients)
   return (
     <section className="ingredient-list">
       <h2>Loaded Ingredients</h2>
       <ul>
         {props.ingredients.map(ig => (
-          <li key={ig.id} onClick={()=>deleteIngredients(ig.id)}>
+          <li key={ig.id} onClick={()=>{}}>
             <span>{ig.title}</span>
             <span>{ig.amount}x</span>
           </li>
